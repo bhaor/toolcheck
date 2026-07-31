@@ -38,8 +38,32 @@ mediocre ones, and speed matters because this gets run casually.
 | Security advisories | `https://api.osv.dev/v1/query` (free, no key) |
 | MCP server | Its repo as above, plus read its README for the list of tools it exposes and what credentials it wants |
 | Paid product or API | Fetch the actual pricing page. Do not recall pricing from memory; it changes |
+| Adoption | `https://api.npmjs.org/downloads/point/last-week/<name>` for weekly downloads. Label it adoption, never quality |
 
 Cap it at roughly six lookups. This is a quick check, not an audit.
+
+## Reading maintenance signals correctly
+
+Two of the obvious signals lie, and trusting them produces confidently wrong
+cards.
+
+**The `archived` flag misses most dead projects.** Maintainers rarely bother
+archiving. The npm package `request` is deprecated, last published in 2020, and
+carries two advisories, yet its repo still reports `archived: false`. Check the
+registry's `deprecated` field on the latest version, because a maintainer who
+deprecates a package has told you the answer directly, and that beats any
+inference you could draw from commit activity.
+
+**`pushed_at` is not the last commit.** It moves on any branch push, including
+bot commits and dependency bumps, so a project can look active while the code
+has not changed in years. Compare the last *release* date against the last
+commit. A repo with recent commits and no release in three years is a different
+situation from one with neither, and worth saying out loud.
+
+The honest summary of a project like `request` is that it was downloaded
+15,366,818 times in the week to 30 July 2026 and is still deprecated, and both
+halves of that matter to somebody deciding whether to use it. Popularity is not
+health. Report them as separate facts and never let one imply the other.
 
 ## Working out "do I already have this"
 
