@@ -81,6 +81,19 @@ noise and should never appear.
 
 If you genuinely cannot see their setup, say so rather than implying you checked.
 
+**A cheap mechanical first pass.** npm packages carry a `keywords` array. Two
+packages sharing keywords is real evidence they do the same job, and it costs
+one field you have already fetched. `zod` and `joi` share `schema` and
+`validation`. `axios` and `got` share `http` and `fetch`.
+
+The important half is what silence means. `yup` and `date-fns` declare no
+keywords at all, so `zod` versus `yup` and `dayjs` versus `date-fns` both come
+back empty despite being textbook substitutes. **Shared keywords are evidence of
+overlap. Absence of shared keywords is evidence of nothing.** Use the match when
+it fires, and when it does not, fall back to reading what each package actually
+claims to do. Never report "nothing overlaps" on the strength of an empty
+keyword intersection alone.
+
 ## The card
 
 Use this exact shape every time. Consistency is what makes it fast to read on
@@ -124,6 +137,58 @@ The four verdicts, and when each applies:
   confirmed as who they claim to be.
 - **SKIP IT** for everything else not worth the afternoon: costs too much for
   what it does, too much work to set up, solves a problem they don't have.
+
+## Worked example: when the facts run out
+
+Most cards have a hole in them somewhere. This is what a good one looks like, so
+that writing `UNKNOWN` feels like the normal, competent answer rather than a
+failure to try. Everything below was really looked up on 31 July 2026.
+
+```
+TOOLCHECK: @hubspot/mcp-server
+Connects an AI agent to a HubSpot account so it can read and write CRM records.
+
+1. ALIVE OR DEAD
+   Last published 18 June 2025, thirteen months ago.
+   UNKNOWN whether anyone is still maintaining it. The package declares
+   no source repository, so there is no commit history to read. A repo
+   called HubSpot/mcp-server does exist and was last pushed 25 April
+   2025, but the package does not point at it, and that date is before
+   the package was published, so calling them the same thing would be
+   a guess.
+
+2. SAFE
+   No known advisories. Published under the @hubspot scope, so the
+   publisher really is HubSpot. It needs a private app token carrying
+   whatever CRM permissions you grant it, which is the thing to be
+   careful about here.
+
+3. ALREADY HAVE IT?
+   Nothing in your setup touches HubSpot.
+
+4. WHAT IT COSTS
+   The package is free and MIT licensed.
+   UNKNOWN what it costs you in practice, because it needs a HubSpot
+   account and the package page says nothing about which plan.
+
+5. GETTING OUT
+   Easy. Remove the server, revoke the token.
+
+6. VERDICT
+   Close call. Thirteen months without a release is a long time for an
+   MCP server, and you cannot check the source to see whether that means
+   finished or abandoned. If you already run HubSpot, the token is
+   revocable and the downside is small, so USE IT. If you were adopting
+   HubSpot because of this, wait for a sign of life.
+
+Checked 31 July 2026 via npm registry, OSV, GitHub search.
+```
+
+Three things that card does deliberately. It says `UNKNOWN` twice without
+apologising. It reports the nearby repo *and* explains why that is not proof,
+rather than either hiding it or quietly treating it as the source. And it gives
+a verdict anyway, with the hinge visible, because "it depends" on its own is not
+an answer anybody can use.
 
 ## Language
 

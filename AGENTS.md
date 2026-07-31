@@ -48,6 +48,8 @@ Ground this in what is actually present, not in impressions:
 - Project dependencies: read `package.json`, `requirements.txt`, `pyproject.toml`, `go.mod`
 - Anything the user has mentioned subscribing to
 
+**A cheap mechanical first pass.** npm packages carry a `keywords` array, and two packages sharing keywords is real evidence they do the same job. `zod` and `joi` share `schema` and `validation`; `axios` and `got` share `http` and `fetch`. But `yup` and `date-fns` declare no keywords at all, so textbook substitute pairs come back empty. Shared keywords are evidence of overlap; absence of shared keywords is evidence of nothing. Never report "nothing overlaps" on an empty keyword intersection alone.
+
 Name the specific overlapping thing. "You already have Postiz, which posts to social platforms" is useful. "This may overlap with existing tools" is noise. If you cannot see their setup, say so rather than implying you checked.
 
 ## The card
@@ -85,6 +87,14 @@ Checked <date> via <sources>.
 **RISKY** for an unfixed advisory, abandonment with no successor, access demands well beyond the job, or a publisher who cannot be confirmed.
 
 **SKIP IT** for everything else not worth the afternoon.
+
+## When the facts run out
+
+Most cards have a hole somewhere. Writing `UNKNOWN` should feel like the normal, competent answer, not a failure to try. A real example, looked up 31 July 2026:
+
+`@hubspot/mcp-server` was last published 18 June 2025. Whether anyone still maintains it is UNKNOWN, because the package declares no source repository and there is no commit history to read. A repo called `HubSpot/mcp-server` exists and was last pushed 25 April 2025, but the package does not point at it and that date precedes the release, so treating them as the same thing would be a guess. Its cost is also UNKNOWN, since it needs a HubSpot account and the package page says nothing about which plan.
+
+That card still ends in a verdict. It reports the nearby repo and explains why it is not proof, rather than hiding it or silently adopting it. When something is genuinely a close call, say what it turns on and give the verdict anyway, because "it depends" on its own is not an answer anybody can use.
 
 ## Language
 

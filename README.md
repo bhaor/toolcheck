@@ -191,6 +191,7 @@ Worth knowing before you rely on it.
 
 - **It tells you what is knowable, not whether you will enjoy using it.** Ergonomics, documentation quality and whether the API feels right are not in here.
 - **Overlap detection only sees what it can see.** If you subscribe to something outside the machine you are on, say so and it will factor that in.
+- **Overlap is best effort, not a guarantee.** Shared npm keywords are strong evidence two packages do the same job, and that catches pairs like `zod` and `joi`. But plenty of packages declare no keywords at all, including `yup` and `date-fns`, so the signal goes quiet exactly where you would most want it. A card saying nothing overlaps means nothing was found, not that nothing exists.
 - **A clean card is not a safety guarantee.** Malicious packages get published faster than advisory databases catalogue them. "No known problems" means exactly that.
 - **Newly published tools look thin.** Something released last week has no track record, and the card will say so rather than pretend otherwise. That is correct behaviour, but it does mean genuinely good new tools can read as unproven.
 - **Pricing pages change.** The card is accurate on the day it was run. The date is printed at the bottom for that reason.
