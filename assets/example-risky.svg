@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" width="900" height="760" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <rect width="900" height="760" rx="12" fill="#010409"/>
+  <rect x="0" y="0" width="900" height="44" rx="12" fill="#161b22"/>
+  <rect x="0" y="32" width="900" height="12" fill="#161b22"/>
+  <circle cx="26" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="48" cy="22" r="6" fill="#febc2e"/>
+  <circle cx="70" cy="22" r="6" fill="#28c840"/>
+  <text x="450" y="27" font-size="12" fill="#6e7681" text-anchor="middle">toolcheck</text>
+
+  <text x="32" y="82" font-size="14" fill="#8b949e">$ </text>
+  <text x="50" y="82" font-size="14" fill="#e6edf3">/toolcheck request</text>
+
+  <text x="32" y="126" font-size="15" font-weight="700" fill="#e6edf3">TOOLCHECK: request</text>
+  <text x="32" y="150" font-size="13" fill="#8b949e">An HTTP client for Node. One of the most downloaded packages ever written.</text>
+
+  <line x1="32" y1="172" x2="868" y2="172" stroke="#21262d"/>
+
+  <text x="32" y="202" font-size="13" font-weight="700" fill="#7d8590">1. ALIVE OR DEAD</text>
+  <text x="52" y="226" font-size="13" fill="#f85149">Dead, and the maintainer says so. Formally deprecated.</text>
+  <text x="52" y="246" font-size="13" fill="#c9d1d9">Last published 11 February 2020, over six years ago.</text>
+  <text x="52" y="266" font-size="13" fill="#c9d1d9">The repo is not marked archived, which is why this gets missed.</text>
+
+  <text x="32" y="304" font-size="13" font-weight="700" fill="#7d8590">2. SAFE</text>
+  <text x="52" y="328" font-size="13" fill="#c9d1d9">Two known advisories, both moderate.</text>
+  <text x="52" y="348" font-size="13" fill="#c9d1d9">Memory exposure: fixed in 2.68.0, so the current version is clear.</text>
+  <text x="52" y="368" font-size="13" fill="#d29922">Server-side request forgery: listed as fixed in 3.0.0.</text>
+  <text x="52" y="388" font-size="13" fill="#f85149">Version 3.0.0 was never published. There is no fix to upgrade to.</text>
+
+  <text x="32" y="426" font-size="13" font-weight="700" fill="#7d8590">3. ALREADY HAVE IT?</text>
+  <text x="52" y="450" font-size="13" fill="#c9d1d9">Yes. Your Node has fetch built in as a global, so for most work you</text>
+  <text x="52" y="470" font-size="13" fill="#c9d1d9">need no HTTP library at all. This would add 20 direct dependencies</text>
+  <text x="52" y="490" font-size="13" fill="#c9d1d9">to do a job your runtime already does.</text>
+
+  <text x="32" y="528" font-size="13" font-weight="700" fill="#7d8590">4. WHAT IT COSTS</text>
+  <text x="52" y="552" font-size="13" fill="#c9d1d9">Free, Apache-2.0. The cost is the 20 dependencies and the migration</text>
+  <text x="52" y="572" font-size="13" fill="#c9d1d9">you will have to do later anyway.</text>
+
+  <text x="32" y="610" font-size="13" font-weight="700" fill="#7d8590">5. GETTING OUT</text>
+  <text x="52" y="634" font-size="13" fill="#c9d1d9">Harder the longer you wait. This is the trap: it still works, so</text>
+  <text x="52" y="654" font-size="13" fill="#c9d1d9">nobody removes it until something forces the issue.</text>
+
+  <text x="32" y="692" font-size="13" font-weight="700" fill="#7d8590">6. VERDICT</text>
+  <rect x="52" y="704" width="66" height="24" rx="5" fill="#9e6a03"/>
+  <text x="64" y="721" font-size="13" font-weight="700" fill="#ffffff">RISKY</text>
+  <text x="132" y="721" font-size="13" fill="#c9d1d9">Deprecated, with an advisory that has no fix.</text>
+
+  <rect x="560" y="186" width="308" height="86" rx="8" fill="#161b22" stroke="#30363d"/>
+  <text x="576" y="210" font-size="11" fill="#6e7681">ADOPTION, NOT QUALITY</text>
+  <text x="576" y="236" font-size="18" font-weight="700" fill="#e6edf3">15,366,818</text>
+  <text x="576" y="256" font-size="11" fill="#7d8590">downloads in the week to 30 Jul 2026</text>
+
+  <line x1="32" y1="738" x2="868" y2="738" stroke="#21262d"/>
+  <text x="32" y="754" font-size="11" fill="#6e7681">Checked 31 July 2026 via npm registry, OSV advisory database, GitHub API.</text>
+</svg>

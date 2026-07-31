@@ -1,0 +1,76 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # 3.9 is what macOS still ships as system python, so it is the real
+        # floor for anyone installing the hook without a managed runtime.
+        python: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Hook behaviour
+        run: python3 tests/test_hook.py
+
+      - name: SVGs are valid XML
+        run: |
+          for f in assets/*.svg; do
+            python3 -c "import xml.dom.minidom,sys; xml.dom.minidom.parse('$f')"
+            echo "ok  $f"
+          done
+
+      - name: Skill frontmatter is present and parseable
+        run: |
+          python3 - <<'PY'
+          import sys
+          text = open('skills/toolcheck/SKILL.md', encoding='utf-8').read()
+          if not text.startswith('---'):
+              sys.exit('SKILL.md is missing YAML frontmatter')
+          block = text.split('---', 2)[1]
+          for field in ('name:', 'description:'):
+              if field not in block:
+                  sys.exit(f'SKILL.md frontmatter is missing {field}')
+          print('ok  frontmatter has name and description')
+          PY
+
+      - name: House style, no em or en dashes in prose
+        run: |
+          if grep -rn $'—\|–' README.md CONTRIBUTING.md AGENTS.md skills/ assets/; then
+            echo "found an em or en dash, see the line above"
+            exit 1
+          fi
+          echo "ok  no em or en dashes"
+
+      - name: Documented sources still respond
+        run: |
+          fail=0
+          for url in \
+            "https://api.deps.dev/v3alpha/systems/npm/packages/zod" \
+            "https://registry.npmjs.org/zod" \
+            "https://api.npmjs.org/downloads/point/last-week/zod" \
+            "https://pypi.org/pypi/requests/json"; do
+            code=$(curl -s -o /dev/null -w '%{http_code}' --max-time 20 "$url")
+            if [ "$code" != "200" ]; then
+              echo "FAIL $code  $url"
+              fail=1
+            else
+              echo "ok   $code  $url"
+            fi
+          done
+          exit $fail

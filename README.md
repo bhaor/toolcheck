@@ -2,6 +2,7 @@
   <img src="assets/hero.svg" alt="toolcheck" width="100%">
 
   <p>
+    <a href="https://github.com/bhaor/toolcheck/actions/workflows/ci.yml"><img src="https://github.com/bhaor/toolcheck/actions/workflows/ci.yml/badge.svg" alt="CI status"></a>
     <a href="#install"><img src="https://img.shields.io/badge/install-30_seconds-3fb950?style=flat-square" alt="Install in 30 seconds"></a>
     <a href="#works-with"><img src="https://img.shields.io/badge/Claude_Code-supported-2f81f7?style=flat-square" alt="Claude Code supported"></a>
     <a href="#works-with"><img src="https://img.shields.io/badge/Codex-supported-2f81f7?style=flat-square" alt="Codex supported"></a>
@@ -15,6 +16,7 @@
     <a href="#the-problem">Problem</a> ·
     <a href="#what-you-get">What you get</a> ·
     <a href="#install">Install</a> ·
+    <a href="#catching-it-at-the-moment-you-install">Install-time hook</a> ·
     <a href="#how-it-works">How it works</a> ·
     <a href="#the-rules">Rules</a> ·
     <a href="#limitations">Limitations</a>
@@ -51,6 +53,20 @@ Ask about anything, get the same six-part card every time.
 
 Six sections, always in the same order, so by the third time you use it your eye goes straight to the one you care about. Notice section 4 in that example. The free tier has no commercial licence, which is on the pricing page and which nobody reads. That is the sort of thing this exists to catch.
 
+### When the answer is no
+
+That was the easy case. Here is `request`, an HTTP library downloaded over fifteen million times a week.
+
+<div align="center">
+  <img src="assets/example-risky.svg" alt="A RISKY verdict for the request package, showing it is deprecated with an advisory that has no available fix" width="820">
+</div>
+
+Three things in that card are worth pointing at, because they are the reason a quick glance gets this wrong:
+
+- **Its repo is not marked archived.** Maintainers rarely bother. If you check the archived flag, which is the obvious thing to check, this package looks fine.
+- **One advisory is listed as fixed in 3.0.0.** Version 3.0.0 was never published. There is nothing to upgrade to, so "there is a fix" is technically true and practically false.
+- **Fifteen million weekly downloads.** Popularity is not health, and the card reports them as separate facts rather than letting the big number imply the small one.
+
 ## How it works
 
 <div align="center">
@@ -62,20 +78,49 @@ Six sections, always in the same order, so by the third time you use it your eye
 **Claude Code**
 
 ```bash
-git clone https://github.com/bhaor/toolcheck.git
-cp -r toolcheck/skills/toolcheck ~/.claude/skills/
+mkdir -p ~/.claude/skills && curl -fsSL https://github.com/bhaor/toolcheck/archive/refs/heads/main.tar.gz | tar -xz --strip-components=2 -C ~/.claude/skills toolcheck-main/skills/toolcheck
 ```
 
 **Codex**
 
 ```bash
-git clone https://github.com/bhaor/toolcheck.git
-cp toolcheck/AGENTS.md ~/.codex/AGENTS.md
+curl -fsSL https://raw.githubusercontent.com/bhaor/toolcheck/main/AGENTS.md >> ~/.codex/AGENTS.md
 ```
 
-If you already have an `AGENTS.md`, paste the contents onto the end of yours instead of overwriting it.
-
 That is the whole install. No API keys, no account, no config file. Every source it uses is free and public.
+
+> **There is deliberately no `curl | sh` here.** That pattern pipes a script straight into your shell, which is the exact thing this tool exists to talk you out of. The commands above download a file and unpack it. Nothing executes. If a tool that tells you to check before installing asked you to blind-run its installer, you should not trust it.
+
+## Catching it at the moment you install
+
+The skill answers when you ask. The hook asks on your behalf, at the point where the decision actually happens.
+
+```bash
+mkdir -p ~/.claude/hooks && curl -fsSL https://raw.githubusercontent.com/bhaor/toolcheck/main/hooks/toolcheck-hook.py -o ~/.claude/hooks/toolcheck-hook.py
+```
+
+Then add this to `~/.claude/settings.json`:
+
+```json
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          { "type": "command", "command": "python3 ~/.claude/hooks/toolcheck-hook.py" }
+        ]
+      }
+    ]
+  }
+}
+```
+
+Now when the agent reaches for `npm install some-package`, the hook notices and asks for a card before it runs.
+
+**It never blocks.** It only adds a note, and the command proceeds. A gate that interrupts a working session gets switched off within a week, so this one does not interrupt. It also stays quiet for packages already in your `package.json`, since reinstalling something you already depend on is not a new decision.
+
+Needs Python 3.7 or newer, which includes the 3.9 that macOS ships by default.
 
 ## Usage
 
@@ -149,6 +194,12 @@ Worth knowing before you rely on it.
 - **A clean card is not a safety guarantee.** Malicious packages get published faster than advisory databases catalogue them. "No known problems" means exactly that.
 - **Newly published tools look thin.** Something released last week has no track record, and the card will say so rather than pretend otherwise. That is correct behaviour, but it does mean genuinely good new tools can read as unproven.
 - **Pricing pages change.** The card is accurate on the day it was run. The date is printed at the bottom for that reason.
+
+## If it got something wrong about your project
+
+This is an automated summary of public data, not a security audit and not a judgment about anyone's work. It reads registries and advisory databases and reports what they say on the day you ask.
+
+If a card is wrong about something you maintain, [open an issue](https://github.com/bhaor/toolcheck/issues) and it gets fixed. Please paste the card, because the fix is usually in how a signal is read rather than in the data itself. The `archived` flag problem above was found exactly that way.
 
 ## Contributing
 
