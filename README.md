@@ -6,6 +6,7 @@
     <a href="#works-with"><img src="https://img.shields.io/badge/Claude_Code-supported-2f81f7?style=flat-square" alt="Claude Code supported"></a>
     <a href="#works-with"><img src="https://img.shields.io/badge/Codex-supported-2f81f7?style=flat-square" alt="Codex supported"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/licence-MIT-8b949e?style=flat-square" alt="MIT licence"></a>
+    <a href="https://fallbacklabs.com"><img src="https://img.shields.io/badge/by-Fallback_Labs-0d1117?style=flat-square" alt="By Fallback Labs"></a>
   </p>
 
   <p><strong>Ask whether a tool is worth adopting. Get a straight answer with sources.</strong></p>
@@ -24,14 +25,21 @@
 
 ## The problem
 
-Someone recommends a package. A repo trends. An MCP server looks useful. You have about four minutes to decide whether it goes into your project, and the honest options are all bad:
+New AI tools arrive faster than anyone can judge them. There are **22,277 GitHub repositories tagged `mcp-server`** and **over 4.2 million packages on npm**, and both counts were lower when this sentence was written. Every day brings another repo, another API, another agent framework, another MCP server, and all of them look good, because the person posting it built it.
 
-- **Read the README.** Written by the person selling it to you.
-- **Check the stars.** Popularity is not maintenance, and it is definitely not fit.
-- **Ask an AI.** It will confidently tell you the last commit was in March. It may be making that up.
-- **Just install it.** Find out in six months when it is load bearing.
+Two questions decide whether any of it matters to you:
 
-The specific thing nobody checks is whether you *already own something that does this*. Every dependency scanner on the market judges a package on its own merits. None of them know what is already sitting in your project.
+**Is this actually useful to me?** Not useful in the abstract. Useful for the work you actually do.
+
+**Will it fit what I already have?** Whether it clashes with your setup, and whether you already own something that does this exact job.
+
+Neither question has a fast answer today. The README is written by the seller. Star counts measure popularity, which is not maintenance and is definitely not fit. Ask an AI and it will tell you the last commit was in March, and it may have invented that. So most people install it anyway and find out in six months, once it is load bearing.
+
+Meanwhile every dependency scanner on the market is busy answering a third question: is this package dangerous. That is worth knowing, but it judges the package alone, in a vacuum. None of them know what is already sitting in your project, and that is the part you cannot look up.
+
+**This answers the first two questions.** It reads what you already have, checks the candidate against live sources, and tells you in plain English whether it earns a place in your stack.
+
+<sub>Counts pulled from the GitHub search API and the npm registry on 31 July 2026. Reproduce them: <code>gh api "search/repositories?q=topic:mcp-server" --jq .total_count</code></sub>
 
 ## What you get
 
@@ -152,6 +160,23 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 MIT. See [LICENSE](LICENSE).
 
-<div align="center">
-  <sub>Built by <a href="https://fallbacklabs.com">Fallback Labs</a></sub>
-</div>
+---
+
+```
+███████╗ █████╗ ██╗     ██╗     ██████╗  █████╗  ██████╗██╗  ██╗
+██╔════╝██╔══██╗██║     ██║     ██╔══██╗██╔══██╗██╔════╝██║ ██╔╝
+█████╗  ███████║██║     ██║     ██████╔╝███████║██║     █████╔╝ 
+██╔══╝  ██╔══██║██║     ██║     ██╔══██╗██╔══██║██║     ██╔═██╗ 
+██║     ██║  ██║███████╗███████╗██████╔╝██║  ██║╚██████╗██║  ██╗
+╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
+██╗      █████╗ ██████╗ ███████╗
+██║     ██╔══██╗██╔══██╗██╔════╝
+██║     ███████║██████╔╝███████╗
+██║     ██╔══██║██╔══██╗╚════██║
+███████╗██║  ██║██████╔╝███████║
+╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝
+```
+
+**Built by [Fallback Labs](https://fallbacklabs.com)**
+
+We build AI systems for marketing teams. If this saved you from a bad install, come say hello at **[fallbacklabs.com](https://fallbacklabs.com)**.
