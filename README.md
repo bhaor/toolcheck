@@ -54,14 +54,14 @@ Six sections, always in the same order, so by the third time you use it your eye
 **Claude Code**
 
 ```bash
-git clone https://github.com/OWNER/toolcheck.git
+git clone https://github.com/bhaor/toolcheck.git
 cp -r toolcheck/skills/toolcheck ~/.claude/skills/
 ```
 
 **Codex**
 
 ```bash
-git clone https://github.com/OWNER/toolcheck.git
+git clone https://github.com/bhaor/toolcheck.git
 cp toolcheck/AGENTS.md ~/.codex/AGENTS.md
 ```
 
