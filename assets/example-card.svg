@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 756" width="900" height="756" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace">
+  <rect width="900" height="756" rx="12" fill="#010409"/>
+  <rect x="0" y="0" width="900" height="44" rx="12" fill="#161b22"/>
+  <rect x="0" y="32" width="900" height="12" fill="#161b22"/>
+  <circle cx="26" cy="22" r="6" fill="#ff5f57"/>
+  <circle cx="48" cy="22" r="6" fill="#febc2e"/>
+  <circle cx="70" cy="22" r="6" fill="#28c840"/>
+  <text x="450" y="27" font-size="12" fill="#6e7681" text-anchor="middle">toolcheck</text>
+
+  <text x="32" y="82" font-size="14" fill="#8b949e">$ </text>
+  <text x="50" y="82" font-size="14" fill="#e6edf3">/toolcheck elevenlabs-mcp</text>
+
+  <text x="32" y="126" font-size="15" font-weight="700" fill="#e6edf3">TOOLCHECK: ElevenLabs MCP server</text>
+  <text x="32" y="150" font-size="13" fill="#8b949e">Lets Claude generate voiceovers, sound effects and music directly,</text>
+  <text x="32" y="170" font-size="13" fill="#8b949e">without you opening the ElevenLabs website.</text>
+
+  <line x1="32" y1="192" x2="868" y2="192" stroke="#21262d"/>
+
+  <text x="32" y="222" font-size="13" font-weight="700" fill="#7d8590">1. ALIVE OR DEAD</text>
+  <text x="52" y="246" font-size="13" fill="#c9d1d9">Very alive. Last commit 30 July 2026, which was yesterday.</text>
+  <text x="52" y="266" font-size="13" fill="#c9d1d9">Official ElevenLabs repo, not a third party. 1,498 stars.</text>
+
+  <text x="32" y="304" font-size="13" font-weight="700" fill="#7d8590">2. SAFE</text>
+  <text x="52" y="328" font-size="13" fill="#c9d1d9">No known security advisories. MIT licence, no strings.</text>
+  <text x="52" y="348" font-size="13" fill="#c9d1d9">Needs your API key, so treat that key like a password.</text>
+
+  <text x="32" y="386" font-size="13" font-weight="700" fill="#7d8590">3. ALREADY HAVE IT?</text>
+  <text x="52" y="410" font-size="13" fill="#c9d1d9">Nothing overlaps. You have DataForSEO, Postiz and SalesBlink</text>
+  <text x="52" y="430" font-size="13" fill="#c9d1d9">connected. None of them do voice or audio.</text>
+
+  <text x="32" y="468" font-size="13" font-weight="700" fill="#7d8590">4. WHAT IT COSTS</text>
+  <text x="52" y="492" font-size="13" fill="#c9d1d9">Free: $0, 10k credits/month.  Starter: $6/month, 30k credits.</text>
+  <text x="52" y="512" font-size="13" fill="#d29922">The free tier has no commercial licence. For client work you</text>
+  <text x="52" y="532" font-size="13" fill="#d29922">need Starter.</text>
+  <text x="52" y="552" font-size="13" fill="#c9d1d9">Setup: about 10 minutes, one API key.</text>
+
+  <text x="32" y="590" font-size="13" font-weight="700" fill="#7d8590">5. GETTING OUT</text>
+  <text x="52" y="614" font-size="13" fill="#c9d1d9">Easy. Disconnecting removes the tools and changes nothing else.</text>
+
+  <text x="32" y="652" font-size="13" font-weight="700" fill="#7d8590">6. VERDICT</text>
+  <rect x="52" y="666" width="76" height="24" rx="5" fill="#238636"/>
+  <text x="64" y="683" font-size="13" font-weight="700" fill="#ffffff">USE IT</text>
+  <text x="142" y="683" font-size="13" fill="#c9d1d9">but only on Starter, not Free, for client work.</text>
+
+  <line x1="32" y1="712" x2="868" y2="712" stroke="#21262d"/>
+  <text x="32" y="734" font-size="11" fill="#6e7681">Checked 31 July 2026 via GitHub API, OSV advisory database, elevenlabs.io/pricing.</text>
+</svg>
