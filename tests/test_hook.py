@@ -54,6 +54,11 @@ EXTRACTION = [
     ("cargo add serde",                                 ["serde"]),
     ("go get github.com/foo/bar",                       ["github.com/foo/bar"]),
     ("pip install 'requests==2.31.0'",                  ["'requests"]),
+    ("git clone https://github.com/openai/whisper.git", ["openai/whisper"]),
+    ("git clone git@github.com:foo/bar.git",            ["foo/bar"]),
+    ("git clone --depth 1 https://github.com/a/b.git",  ["a/b"]),
+    ("git clone https://github.com/a/b.git my-folder",  ["a/b"]),
+    ("git pull",                                        []),
 ]
 
 # Commands that must never produce a note, including near misses that share
@@ -63,6 +68,8 @@ SILENT = [
     "git commit -m 'add install docs'",
     "echo npm install zod > notes.txt",
     "cat requirements.txt",
+    "git status",
+    "git commit -m 'clone the config'",
     "npm install",
 ]
 

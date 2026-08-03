@@ -33,6 +33,9 @@ INSTALL_PATTERNS = [
     r"^cargo\s+add\b",
     r"^go\s+get\b",
     r"^claude\s+mcp\s+add\b",
+    # Cloning a repo is the same decision as installing one, and for anyone
+    # evaluating tools it is usually the first move rather than the last.
+    r"^git\s+clone\b",
 ]
 
 # Prefixes that sit in front of a real command without changing what it is.
@@ -70,6 +73,20 @@ def extract_packages(command: str) -> list[str]:
     segment = install_segment(command)
     if segment is None:
         return []
+
+    # A clone names a repository rather than a package. Report it as owner/repo,
+    # which is what someone would actually search for.
+    if segment.startswith("git "):
+        for tok in segment.split()[2:]:
+            # A repo reference always contains a path separator, which is what
+            # tells it apart from a flag value like the 1 in `--depth 1`.
+            if tok.startswith("-") or not ("/" in tok or ":" in tok):
+                continue
+            repo = re.sub(r"\.git$", "", tok.rstrip("/"))
+            repo = re.sub(r"^(?:https?://|git@)[^/:]+[/:]", "", repo)
+            return [repo] if repo else []
+        return []
+
     tokens = segment.split()
     # Everything after a bare `--` is a passthrough command, not a package.
     # `claude mcp add name -- npx some-server` names one server, not three.
