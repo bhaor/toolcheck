@@ -116,7 +116,9 @@ Then add this to `~/.claude/settings.json`:
 }
 ```
 
-Now when the agent reaches for `npm install some-package`, the hook notices and asks for a card before it runs.
+Now when the agent reaches for `npm install some-package`, or `git clone` on a repo you have not used before, the hook notices and asks for a card before it runs.
+
+It watches `npm`, `pnpm`, `yarn`, `bun`, `pip`, `uv`, `poetry`, `cargo`, `go get`, `claude mcp add`, and `git clone`. Cloning is on that list deliberately, because for most people it is the *first* move when sizing up a new tool rather than the last.
 
 **It never blocks.** It only adds a note, and the command proceeds. A gate that interrupts a working session gets switched off within a week, so this one does not interrupt. It also stays quiet for packages already in your `package.json`, since reinstalling something you already depend on is not a new decision.
 
